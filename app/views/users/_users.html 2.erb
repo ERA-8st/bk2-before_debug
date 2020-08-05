@@ -1,0 +1,24 @@
+<% @users.each do |user| %>
+		<tr>
+			<td><%= attachment_image_tag(user, :profile_image,  size: "50x50", fallback: "no-image-mini.jpg") %></td>
+			<td><%= user.name %></td>
+			<td><%= link_to "Show", user_path(user)%></td>
+			<td>
+				<div class="follow_count">
+					<%= render "users/followcount", user: user%>
+				</div>
+			</td>
+			<td>
+				<% if user != current_user%>
+				 <% @user = user %>
+					<div class="follow_form">
+						<% if current_user.following?(user) %>
+						<%= render "users/unfollow" %>
+						<% else %>
+						<%= render "users/follow" %>
+						<% end %>
+					</div>
+				<% end %>
+			</td>
+		</tr>
+<% end %>
