@@ -12,6 +12,20 @@
 	</tr>
 </table>
 
+<div class="follow_count">
+	<%= render "users/followcount", user: user%>
+</div>
+
+<% if user != current_user%>
+  <div class="follow_form">
+    <% if current_user.following?(user) %>
+      <%= render "users/unfollow" %>
+    <% else %>
+      <%= render "users/follow" %>
+    <% end %>
+  </div>
+<% end %>
+
 <div class="row">
 	<%= link_to '', edit_user_path(user), class: "col-xs-12 btn btn-default glyphicon glyphicon-wrench edit_user_#{user.id}" %>
 </div>
